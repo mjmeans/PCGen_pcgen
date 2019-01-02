@@ -73,7 +73,7 @@ Icon "${SrcDir}\Local\PCGen2.ico"
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_RESERVEFILE_LANGDLL
 
-!define ARP "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPDIR}"
+!define ARP "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAMEANDVERSION}"
 
 !macro VerifyUserIsAdmin
 UserInfo::GetAccountType
@@ -329,7 +329,7 @@ SectionEnd
 
 Function .onInit
 	ReadRegStr $R0 HKLM \
-  	"Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPDIR}" \
+  	"Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAMEANDVERSION}" \
   	"UninstallString"
   	StrCmp $R0 "" done
  
