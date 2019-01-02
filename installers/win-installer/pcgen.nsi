@@ -8,7 +8,7 @@
 ;Windows 32 or 64 bit version
 !include "x64.nsh"
 ;Used for installation size calculation
-!include "FileFunc.nsh"
+;!include "FileFunc.nsh"
 
 ; Define constants
 !define APPNAME "PCGen"
@@ -224,10 +224,10 @@ Section -FinishSection
 	WriteRegStr HKLM "${ARP}" "UninstallString" "$INSTDIR\uninstall.exe"
 	WriteUninstaller "$INSTDIR\uninstall.exe"
 
-	DetailPrint "Calculating installation size..."
-	${GetSize} "$INSTDIR" "/S=0K" $0 $1 $2
- 	IntFmt $0 "0x%08X" $0
- 	WriteRegDWORD HKLM "${ARP}" "EstimatedSize" "$0"
+;	DetailPrint "Calculating installation size..."
+;	${GetSize} "$INSTDIR" "/S=0K" $0 $1 $2
+; 	IntFmt $0 "0x%08X" $0
+; 	WriteRegDWORD HKLM "${ARP}" "EstimatedSize" "$0"
 	DetailPrint "Done!"
 
 SectionEnd
