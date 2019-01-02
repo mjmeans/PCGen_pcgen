@@ -30,7 +30,7 @@
 
 ; Main Install settings
 Name "${APPNAMEANDVERSION}"
-InstallDir "$LOCALAPPDATA\${APPNAME}"
+InstallDir "$LOCALAPPDATA\${APPNAME}\${APPDIR}"
 InstallDirRegKey HKLM "Software\${APPNAME}\${APPDIR}" ""
 OutFile "${OutDir}\${OutName}.exe"
 ;This will save a little less than 1mb, it should be left enabled -Ed
@@ -104,13 +104,13 @@ Section "PCGen" Section1
 	SetOverwrite ifnewer
 
 	; Set Section Files and Shortcuts
-	SetOutPath "$INSTDIR\${APPDIR}\"
+	SetOutPath "$INSTDIR"
 	File /r "${SrcDir}\PCGen_${SIMPVER}_base\*.*"
 
 
 
 	; Set the common files
-	SetOutPath "$INSTDIR\${APPDIR}\data"
+	SetOutPath "$INSTDIR\data"
 	File /r "${SrcDir}\..\..\data\_images"
 	File /r "${SrcDir}\..\..\data\_universal"
 	File /r "${SrcDir}\..\..\data\publisher_logos"
@@ -129,7 +129,7 @@ SubSection /e "PlugIns" Section3
 	Section "Skins"
 
 	SectionIn 1 2 3
-	SetOutPath "$INSTDIR\${APPDIR}\libs"
+	SetOutPath "$INSTDIR\libs"
 	File /r "${SrcDir}\PCGen_${SIMPVER}_opt\plugin\skin\libs\*.*"
 
 	SectionEnd
@@ -137,9 +137,9 @@ SubSection /e "PlugIns" Section3
 	Section "PDF"
 
 	SectionIn 1 2 3
-	SetOutPath "$INSTDIR\${APPDIR}\libs"
+	SetOutPath "$INSTDIR\libs"
 	File /r "${SrcDir}\PCGen_${SIMPVER}_opt\plugin\pdf\libs\*.*"
-	SetOutPath "$INSTDIR\${APPDIR}\outputsheets"
+	SetOutPath "$INSTDIR\outputsheets"
 	File /r "${SrcDir}\PCGen_${SIMPVER}_opt\plugin\pdf\outputsheets\*.*"
 
 	SectionEnd
@@ -147,7 +147,7 @@ SubSection /e "PlugIns" Section3
 	Section "GMGen Plugins"
 
 	SectionIn 1 2 3
-	SetOutPath "$INSTDIR\${APPDIR}\plugins"
+	SetOutPath "$INSTDIR\plugins"
 	File /r "${SrcDir}\PCGen_${SIMPVER}_opt\plugin\gmgen\plugins\*.*"
 
 	SectionEnd
@@ -160,37 +160,37 @@ Section "-Local" Section4
 	SetOverwrite ifnewer
 
 	; Set Section Files and Shortcuts
-	SetOutPath "$INSTDIR\${APPDIR}\Local\"
+	SetOutPath "$INSTDIR\Local\"
 	File /r "${SrcDir}\Local\*.*"
 
 	; Create Shortcuts
-	SetOutPath "$INSTDIR\${APPDIR}\"
+	SetOutPath "$INSTDIR\"
 	CreateDirectory "$SMPROGRAMS\PCGen\${APPDIR}"
-	CreateShortCut "$DESKTOP\${APPDIR}.lnk" "$INSTDIR\${APPDIR}\pcgen.exe" "" \
-				"$INSTDIR\${APPDIR}\Local\PCGen2.ico" 0 SW_SHOWMINIMIZED
+	CreateShortCut "$DESKTOP\${APPDIR}.lnk" "$INSTDIR\pcgen.exe" "" \
+				"$INSTDIR\Local\PCGen2.ico" 0 SW_SHOWMINIMIZED
 # We no longer provide the .bat file.
-#	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\${APPDIR}-Low.lnk" "$INSTDIR\${APPDIR}\pcgen_low_mem.bat" "" \
-#				"$INSTDIR\${APPDIR}\Local\PCGen.ico" 0 SW_SHOWMINIMIZED
-        CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\${APPDIR}-Bat.lnk" "$INSTDIR\${APPDIR}\pcgen.bat" "" \
-				"$INSTDIR\${APPDIR}\Local\PCGen.ico" 0 SW_SHOWMINIMIZED
-	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\${APPDIR}.lnk" "$INSTDIR\${APPDIR}\pcgen.exe" "" \
-				"$INSTDIR\${APPDIR}\Local\pcgen2.ico" 0 SW_SHOWMINIMIZED
-        CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\Convert Data.lnk" "$INSTDIR\${APPDIR}\jre\bin\javaw.exe" \ 
+#	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\${APPDIR}-Low.lnk" "$INSTDIR\pcgen_low_mem.bat" "" \
+#				"$INSTDIR\Local\PCGen.ico" 0 SW_SHOWMINIMIZED
+        CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\${APPDIR}-Bat.lnk" "$INSTDIR\pcgen.bat" "" \
+				"$INSTDIR\Local\PCGen.ico" 0 SW_SHOWMINIMIZED
+	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\${APPDIR}.lnk" "$INSTDIR\pcgen.exe" "" \
+				"$INSTDIR\Local\pcgen2.ico" 0 SW_SHOWMINIMIZED
+        CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\Convert Data.lnk" "$INSTDIR\jre\bin\javaw.exe" \ 
                                 "-Xmx256M -jar pcgen-batch-convert.jar" \
-				"$INSTDIR\${APPDIR}\Local\convert.ico"
+				"$INSTDIR\Local\convert.ico"
 	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\Release Notes.lnk" \ 
-                                "$INSTDIR\${APPDIR}\pcgen-release-notes-${SIMPVER}.html" "" \ 
-                                "$INSTDIR\${APPDIR}\Local\knight.ico"
+                                "$INSTDIR\pcgen-release-notes-${SIMPVER}.html" "" \ 
+                                "$INSTDIR\Local\knight.ico"
 	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\News.lnk" "http://pcgen.sourceforge.net/02_news.php" "" \ 
-                                "$INSTDIR\${APPDIR}\Local\queen.ico"
+                                "$INSTDIR\Local\queen.ico"
 	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\uninstall-${LONGVER}.lnk" \ 
                                 "$INSTDIR\uninstall-${LONGVER}.exe"
-	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\Manual.lnk" "$INSTDIR\${APPDIR}\docs\index.html" "" \ 
-                                "$INSTDIR\${APPDIR}\Local\castle.ico"
+	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\Manual.lnk" "$INSTDIR\docs\index.html" "" \ 
+                                "$INSTDIR\Local\castle.ico"
         ;Add file extension registration
         ;File association. See: http://nsis.sourceforge.net/FileAssoc
         !insertmacro APP_ASSOCIATE "pcg" "PCGen.File" "PCGen Character file" \
-                 "$INSTDIR\${APPDIR}\pcgen.exe,0" "Open with PCGen" "$INSTDIR\${APPDIR}\pcgen.exe $\"%1$\""
+                 "$INSTDIR\pcgen.exe,0" "Open with PCGen" "$INSTDIR\pcgen.exe $\"%1$\""
         System::Call 'Shell32::SHChangeNotify(i ${SHCNE_ASSOCCHANGED}, i 0, i 0, i 0)'
 
 SectionEnd
@@ -200,7 +200,7 @@ Section "Java 64 Bit" Section5
 
         ;Use the right java version
         DetailPrint "Java extraction..."
-        SetOutPath "$INSTDIR\${APPDIR}\jre"
+        SetOutPath "$INSTDIR\jre"
         File /r "${SrcDir}\..\..\jre\jre_x64\*.*"
 	File /r "${SrcDir}\..\..\code\pcgen_JREx64.bat"
         DetailPrint "Java extraction complete!"
@@ -211,7 +211,7 @@ Section "Java 32 Bit" Section6
 
         ;Use the right java version
         DetailPrint "Java extraction..."
-        SetOutPath "$INSTDIR\${APPDIR}\jre"
+        SetOutPath "$INSTDIR\jre"
         File /r "${SrcDir}\..\..\jre\jre_x32\*.*"
 	File /r "${SrcDir}\..\..\code\pcgen_JREx32.bat"
         DetailPrint "Java extraction complete!"
@@ -219,7 +219,7 @@ SectionEnd
 
 Section -FinishSection
 
-	WriteRegStr HKLM "Software\${APPNAME}\${APPDIR}" "" "$INSTDIR\${APPDIR}"
+	WriteRegStr HKLM "Software\${APPNAME}\${APPDIR}" "" "$INSTDIR"
 	WriteRegStr HKLM "${ARP}" "DisplayName" "${APPNAMEANDVERSION}"
 	WriteRegStr HKLM "${ARP}" "UninstallString" "$INSTDIR\uninstall-${APPDIR}.exe"
 	WriteUninstaller "$INSTDIR\uninstall-${APPDIR}.exe"
@@ -253,52 +253,53 @@ Section Uninstall
 	MessageBox MB_YESNO "Do you wish to save, your characters, custom sources etc? $\nAnswering no will delete ${APPDIR}." IDYES Save IDNO NoSave
 
 	Save:
-	CreateDirectory "$INSTDIR\${APPDIR}_Save"
-	CreateDirectory "$INSTDIR\${APPDIR}_Save\characters"
-	CreateDirectory "$INSTDIR\${APPDIR}_Save\customsources"
-	CreateDirectory "$INSTDIR\${APPDIR}_Save\settings"
-	CreateDirectory "$INSTDIR\${APPDIR}_Save\GMGen"
-	CopyFiles /SILENT "$INSTDIR\${APPDIR}\characters\*.*" "$INSTDIR\${APPDIR}_Save\characters\"
-	CopyFiles /SILENT "$INSTDIR\${APPDIR}\data\customsources\*.*" "$INSTDIR\${APPDIR}_Save\customsources\"
-	CopyFiles /SILENT "$INSTDIR\${APPDIR}\*.ini" "$INSTDIR\${APPDIR}_Save\"
-	CopyFiles /SILENT "$INSTDIR\${APPDIR}\settings\*.*" "$INSTDIR\${APPDIR}_Save\settings\"
+!define SAVEDIR "$LOCALAPPDATA\${APPNAME}\${APPDIR}_Save"
+	CreateDirectory "${SAVEDIR}"
+	CreateDirectory "${SAVEDIR}\characters"
+	CreateDirectory "${SAVEDIR}\customsources"
+	CreateDirectory "${SAVEDIR}\settings"
+	CreateDirectory "${SAVEDIR}\GMGen"
+	CopyFiles /SILENT "$INSTDIR\characters\*.*" "${SAVEDIR}\characters\"
+	CopyFiles /SILENT "$INSTDIR\data\customsources\*.*" "${SAVEDIR}\customsources\"
+	CopyFiles /SILENT "$INSTDIR\*.ini" "${SAVEDIR}\"
+	CopyFiles /SILENT "$INSTDIR\settings\*.*" "${SAVEDIR}\settings\"
 	;Ed- This has not been tested, Please test.
-	CopyFiles /SILENT "$INSTDIR\${APPDIR}\plugins\Notes\*.*" "$INSTDIR\${APPDIR}_Save\GMGen\"
+	CopyFiles /SILENT "$INSTDIR\plugins\Notes\*.*" "${SAVEDIR}\GMGen\"
 	MessageBox MB_ICONINFORMATION|MB_OK "A shortcut will be created on your desktop to the saved files."
-	CreateShortCut "$DESKTOP\${APPDIR}_Save.lnk" "$INSTDIR\${APPDIR}_Save"
+	CreateShortCut "$DESKTOP\${APPNAMEANDVERSION}_Save.lnk" "${SAVEDIR}"
 
 	NoSave:
 	; Clean up PCGen program directory by deleting folders.
 	;Ed- This method is used, as a safer alternative
-	RMDir /r "$INSTDIR\${APPDIR}\characters"
-	RMDir /r "$INSTDIR\${APPDIR}\data"
-	RMDir /r "$INSTDIR\${APPDIR}\docs"
-	RMDir /r "$INSTDIR\${APPDIR}\libs"
+	RMDir /r "$INSTDIR\characters"
+	RMDir /r "$INSTDIR\data"
+	RMDir /r "$INSTDIR\docs"
+	RMDir /r "$INSTDIR\libs"
 
         ;Remove local JRE
-        RMDir /r "$INSTDIR\${APPDIR}\jre"
-	RMDir /r "$INSTDIR\${APPDIR}\Local"
-	RMDir /r "$INSTDIR\${APPDIR}\outputsheets"
-	RMDir /r "$INSTDIR\${APPDIR}\plugins"
-	RMDir /r "$INSTDIR\${APPDIR}\preview"
-	RMDir /r "$INSTDIR\${APPDIR}\system"
-	RMDir /r "$INSTDIR\${APPDIR}\settings"
+        RMDir /r "$INSTDIR\jre"
+	RMDir /r "$INSTDIR\Local"
+	RMDir /r "$INSTDIR\outputsheets"
+	RMDir /r "$INSTDIR\plugins"
+	RMDir /r "$INSTDIR\preview"
+	RMDir /r "$INSTDIR\system"
+	RMDir /r "$INSTDIR\settings"
 	;Ed- below would be the removal of all files in the PCGen root directory, on a file by file basis.
-	Delete /REBOOTOK "$INSTDIR\${APPDIR}\pcgen.jar"
-	Delete /REBOOTOK "$INSTDIR\${APPDIR}\pcgen-release-notes-${SIMPVER}.html"
-	Delete /REBOOTOK "$INSTDIR\${APPDIR}\pcgen.exe"
-	Delete /REBOOTOK "$INSTDIR\${APPDIR}\pcgen.sh"
-#	Delete /REBOOTOK "$INSTDIR\${APPDIR}\pcgen_low_mem.bat"
-	Delete /REBOOTOK "$INSTDIR\${APPDIR}\pcgen.bat"
-	Delete /REBOOTOK "$INSTDIR\${APPDIR}\pcgen_JREx32.bat"
-	Delete /REBOOTOK "$INSTDIR\${APPDIR}\pcgen_JREx64.bat"
-	Delete /REBOOTOK "$INSTDIR\${APPDIR}\pcgen-batch-convert.jar"
-	Delete /REBOOTOK "$INSTDIR\${APPDIR}\filepaths.ini"
-	Delete /REBOOTOK "$INSTDIR\${APPDIR}\config.ini"
-	Delete /REBOOTOK "$INSTDIR\${APPDIR}\logging.properties"
-	Delete /REBOOTOK "$INSTDIR\${APPDIR}\pcgen.log"
+	Delete /REBOOTOK "$INSTDIR\pcgen.jar"
+	Delete /REBOOTOK "$INSTDIR\pcgen-release-notes-${SIMPVER}.html"
+	Delete /REBOOTOK "$INSTDIR\pcgen.exe"
+	Delete /REBOOTOK "$INSTDIR\pcgen.sh"
+#	Delete /REBOOTOK "$INSTDIR\pcgen_low_mem.bat"
+	Delete /REBOOTOK "$INSTDIR\pcgen.bat"
+	Delete /REBOOTOK "$INSTDIR\pcgen_JREx32.bat"
+	Delete /REBOOTOK "$INSTDIR\pcgen_JREx64.bat"
+	Delete /REBOOTOK "$INSTDIR\pcgen-batch-convert.jar"
+	Delete /REBOOTOK "$INSTDIR\filepaths.ini"
+	Delete /REBOOTOK "$INSTDIR\config.ini"
+	Delete /REBOOTOK "$INSTDIR\logging.properties"
+	Delete /REBOOTOK "$INSTDIR\pcgen.log"
 	
-	RMDir "$INSTDIR\${APPDIR}"
+	RMDir "$INSTDIR"
 
 	# Always delete uninstaller as the last action
 	Delete /REBOOTOK "$INSTDIR\uninstall-${APPDIR}.exe"
