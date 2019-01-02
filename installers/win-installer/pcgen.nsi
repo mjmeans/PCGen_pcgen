@@ -183,8 +183,8 @@ Section "-Local" Section4
                                 "$INSTDIR\Local\knight.ico"
 	CreateShortCut "$SMPROGRAMS\${APPNAMEANDVERSION}\News.lnk" "http://pcgen.sourceforge.net/02_news.php" "" \ 
                                 "$INSTDIR\Local\queen.ico"
-	CreateShortCut "$SMPROGRAMS\${APPNAMEANDVERSION}\uninstall-${LONGVER}.lnk" \ 
-                                "$INSTDIR\uninstall-${LONGVER}.exe"
+	CreateShortCut "$SMPROGRAMS\${APPNAMEANDVERSION}\uninstall.lnk" \ 
+                                "$INSTDIR\uninstall.exe"
 	CreateShortCut "$SMPROGRAMS\${APPNAMEANDVERSION}\Manual.lnk" "$INSTDIR\docs\index.html" "" \ 
                                 "$INSTDIR\Local\castle.ico"
         ;Add file extension registration
@@ -221,8 +221,8 @@ Section -FinishSection
 
 	WriteRegStr HKLM "Software\${APPNAME}\${APPDIR}" "" "$INSTDIR"
 	WriteRegStr HKLM "${ARP}" "DisplayName" "${APPNAMEANDVERSION}"
-	WriteRegStr HKLM "${ARP}" "UninstallString" "$INSTDIR\uninstall-${APPDIR}.exe"
-	WriteUninstaller "$INSTDIR\uninstall-${APPDIR}.exe"
+	WriteRegStr HKLM "${ARP}" "UninstallString" "$INSTDIR\uninstall.exe"
+	WriteUninstaller "$INSTDIR\uninstall.exe"
 
 	DetailPrint "Calculating installation size..."
 	${GetSize} "$INSTDIR" "/S=0K" $0 $1 $2
@@ -302,7 +302,7 @@ Section Uninstall
 	RMDir "$INSTDIR"
 
 	# Always delete uninstaller as the last action
-	Delete /REBOOTOK "$INSTDIR\uninstall-${APPDIR}.exe"
+	Delete /REBOOTOK "$INSTDIR\uninstall.exe"
 
 	# Try to remove the install directory - this will only happen if it is empty
 	rmDir $INSTDIR
