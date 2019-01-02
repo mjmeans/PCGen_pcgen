@@ -166,14 +166,14 @@ Section "-Local" Section4
 	; Create Shortcuts
 	SetOutPath "$INSTDIR\"
 	CreateDirectory "$SMPROGRAMS\PCGen\${APPDIR}"
-	CreateShortCut "$DESKTOP\${APPDIR}.lnk" "$INSTDIR\pcgen.exe" "" \
+	CreateShortCut "$DESKTOP\${APPNAMEANDVERSION}.lnk" "$INSTDIR\pcgen.exe" "" \
 				"$INSTDIR\Local\PCGen2.ico" 0 SW_SHOWMINIMIZED
 # We no longer provide the .bat file.
 #	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\${APPDIR}-Low.lnk" "$INSTDIR\pcgen_low_mem.bat" "" \
 #				"$INSTDIR\Local\PCGen.ico" 0 SW_SHOWMINIMIZED
-        CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\${APPDIR}-Bat.lnk" "$INSTDIR\pcgen.bat" "" \
+        CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\${APPNAMEANDVERSION}-Bat.lnk" "$INSTDIR\pcgen.bat" "" \
 				"$INSTDIR\Local\PCGen.ico" 0 SW_SHOWMINIMIZED
-	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\${APPDIR}.lnk" "$INSTDIR\pcgen.exe" "" \
+	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\${APPNAMEANDVERSION}.lnk" "$INSTDIR\pcgen.exe" "" \
 				"$INSTDIR\Local\pcgen2.ico" 0 SW_SHOWMINIMIZED
         CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\Convert Data.lnk" "$INSTDIR\jre\bin\javaw.exe" \ 
                                 "-Xmx256M -jar pcgen-batch-convert.jar" \
@@ -244,9 +244,9 @@ SectionEnd
 Section Uninstall
 
 	; Delete Desktop Shortcut
-	Delete "$DESKTOP\${APPDIR}.lnk"
+	Delete "$DESKTOP\${APPNAMEANDVERSION}.lnk"
 	; Delete Shortcut Directory
-	RMDir /r "$SMPROGRAMS\PCGen\${APPDIR}"
+	RMDir /r "$SMPROGRAMS\PCGen\${APPNAMEANDVERSION}"
         ;Delete file extension registration
         !insertmacro APP_UNASSOCIATE "pcg" "PCGen.File"
 
