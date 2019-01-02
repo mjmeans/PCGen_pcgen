@@ -171,21 +171,21 @@ Section "-Local" Section4
 # We no longer provide the .bat file.
 #	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\${APPDIR}-Low.lnk" "$INSTDIR\pcgen_low_mem.bat" "" \
 #				"$INSTDIR\Local\PCGen.ico" 0 SW_SHOWMINIMIZED
-        CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\${APPNAMEANDVERSION}-Bat.lnk" "$INSTDIR\pcgen.bat" "" \
+        CreateShortCut "$SMPROGRAMS\${APPNAMEANDVERSION}\pcgen-Bat.lnk" "$INSTDIR\pcgen.bat" "" \
 				"$INSTDIR\Local\PCGen.ico" 0 SW_SHOWMINIMIZED
-	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\${APPNAMEANDVERSION}.lnk" "$INSTDIR\pcgen.exe" "" \
+	CreateShortCut "$SMPROGRAMS\${APPNAMEANDVERSION}\${APPNAMEANDVERSION}.lnk" "$INSTDIR\pcgen.exe" "" \
 				"$INSTDIR\Local\pcgen2.ico" 0 SW_SHOWMINIMIZED
-        CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\Convert Data.lnk" "$INSTDIR\jre\bin\javaw.exe" \ 
+        CreateShortCut "$SMPROGRAMS\${APPNAMEANDVERSION}\Convert Data.lnk" "$INSTDIR\jre\bin\javaw.exe" \ 
                                 "-Xmx256M -jar pcgen-batch-convert.jar" \
 				"$INSTDIR\Local\convert.ico"
-	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\Release Notes.lnk" \ 
+	CreateShortCut "$SMPROGRAMS\${APPNAMEANDVERSION}\Release Notes.lnk" \ 
                                 "$INSTDIR\pcgen-release-notes-${SIMPVER}.html" "" \ 
                                 "$INSTDIR\Local\knight.ico"
-	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\News.lnk" "http://pcgen.sourceforge.net/02_news.php" "" \ 
+	CreateShortCut "$SMPROGRAMS\${APPNAMEANDVERSION}\News.lnk" "http://pcgen.sourceforge.net/02_news.php" "" \ 
                                 "$INSTDIR\Local\queen.ico"
-	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\uninstall-${LONGVER}.lnk" \ 
+	CreateShortCut "$SMPROGRAMS\${APPNAMEANDVERSION}\uninstall-${LONGVER}.lnk" \ 
                                 "$INSTDIR\uninstall-${LONGVER}.exe"
-	CreateShortCut "$SMPROGRAMS\PCGen\${APPDIR}\Manual.lnk" "$INSTDIR\docs\index.html" "" \ 
+	CreateShortCut "$SMPROGRAMS\${APPNAMEANDVERSION}\Manual.lnk" "$INSTDIR\docs\index.html" "" \ 
                                 "$INSTDIR\Local\castle.ico"
         ;Add file extension registration
         ;File association. See: http://nsis.sourceforge.net/FileAssoc
@@ -246,7 +246,7 @@ Section Uninstall
 	; Delete Desktop Shortcut
 	Delete "$DESKTOP\${APPNAMEANDVERSION}.lnk"
 	; Delete Shortcut Directory
-	RMDir /r "$SMPROGRAMS\PCGen\${APPNAMEANDVERSION}"
+	RMDir /r "$SMPROGRAMS\${APPNAMEANDVERSION}"
         ;Delete file extension registration
         !insertmacro APP_UNASSOCIATE "pcg" "PCGen.File"
 
